@@ -1,3 +1,6 @@
+// Check time every 1 seconds
+setInterval(timeCheck, 1000);
+
 // Listen for form submit
 document.getElementById('myForm').addEventListener('submit', saveEvent);
 
@@ -83,7 +86,6 @@ function fetchEvents() {
   // collect times in AM and PM seperatetly
   var timeAM = [];
   var timePM = [];
-  var orderTime = [];
   for(var x = 0; x < events.length; x++) {
     if(events[x].timeOf == "AM") {
       var newTime = parseFloat(events[x].time.replace(":","."));
@@ -143,7 +145,7 @@ function fetchEvents() {
     if(i <= timeAM.length-1) {
       var stringed = combinedTime[i].toString();
       if(Math.round(combinedTime[i]) === combinedTime[i]) {
-        var editStringed = stringed + ":00"
+        var editStringed = stringed + ":00";
       } else {
         var editStringed = stringed.replace(".",":");
       }
@@ -151,7 +153,7 @@ function fetchEvents() {
     } else {
       var stringed = combinedTime[i].toString();
       if(Math.round(combinedTime[i]) === combinedTime[i]) {
-        var editStringed = stringed + ":00"
+        var editStringed = stringed + ":00";
       } else {
         var editStringed = stringed.replace(".",":");
       }
@@ -188,3 +190,33 @@ function validateForm(eventName, eventTime){
 
   return true;
 }
+
+
+function timeCheck() {
+  var date = new Date();
+  var digitalCount = date.toLocaleTimeString();
+  // Remove AM/PM and Seconds for Timer
+  if(digitalCount.indexOf("PM") > -1) {
+  var digitalTime = digitalCount.replace(" PM", "");
+  var remove = digitalTime.slice(digitalTime.length-3, digitalTime.length);
+  var time = digitalTime.replace(remove, "");
+  } else {
+  var digitalTime = digitalCount.replace(" AM", "");
+  var remove = digitalTime.slice(digitalTime.length-3, digitalTime.length);
+  var time = digitalTime.replace(remove, "");
+  }
+  // grabbing whether it is AM or PM
+  var realTimeAMPM = digitalCount.slice(-2);
+
+  // Parse over event info
+  var events = JSON.parse(localStorage.getItem('events'));
+  // Loop through events to compare time and timeOf with Digital time
+  for(var i =0;i < events.length;i++){
+    // Make sure it only runs once then plays noise/notification
+    if(events[i].time == time && remove == ":00" && events[i].timeOf == realTimeAMPM) {
+      var audio = new Audio('ding.mp3');
+      audio.play();
+    }
+  }
+}
+
