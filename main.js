@@ -1,9 +1,6 @@
 // Check time every 1 seconds
-setInterval(crap, 1000);
+setInterval(timeCheck, 1000);
 
-function crap() {
-  alert('hello');
-}
 // Listen for form submit
 document.getElementById('myForm').addEventListener('submit', saveEvent);
 
