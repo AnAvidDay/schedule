@@ -216,6 +216,7 @@ function timeCheck() {
     if(events[i].time == time && remove == ":00" && events[i].timeOf == realTimeAMPM) {
       var audio = new Audio('ding.mp3');
       audio.play();
+      alert('work?');
     }
   }
 }
