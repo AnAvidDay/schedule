@@ -165,8 +165,8 @@ function fetchEvents() {
     var time = events[index].time;
     var timeOf = events[index].timeOf;
     eventsResults.innerHTML += '<div class="well">'+
-                                  '<h3>'+time+' '+timeOf+'<h3>' +
-                                  '<h3>'+name+'<h3>' +
+                                  '<h4>'+time+' '+timeOf+'<h4>' +
+                                  '<h4>'+name+'<h3>' +
                                   ' <a onclick="deleteEvent(\''+time+'\')" class="btn btn-danger" href="#">Delete</a> ' +
 
                                   '</div>';
@@ -216,8 +216,8 @@ function timeCheck() {
     if(events[i].time == time && remove == ":00" && events[i].timeOf == realTimeAMPM) {
       var audio = new Audio('ding.mp3');
       audio.play();
-      alert('work?');
     }
   }
 }
+
 
