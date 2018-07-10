@@ -1,1 +1,1 @@
-https://davidiscool.github.io/schedule/
+https://anavidday.github.io/schedule/
